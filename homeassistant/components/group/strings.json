@@ -6,6 +6,7 @@
         "title": "Add Group",
         "description": "Groups allow you to create a new entity that represents multiple entities of the same type.",
         "menu_options": {
+          "automation": "Automation group",
           "binary_sensor": "Binary sensor group",
           "cover": "Cover group",
           "event": "Event group",
@@ -15,6 +16,14 @@
           "media_player": "Media player group",
           "sensor": "Sensor group",
           "switch": "Switch group"
+        }
+      },
+      "automation": {
+        "title": "[%key:component::group::config::step::user::title%]",
+        "data": {
+          "entities": "[%key:component::group::config::step::binary_sensor::data::entities%]",
+          "hide_members": "[%key:component::group::config::step::binary_sensor::data::hide_members%]",
+          "name": "[%key:common::config_flow::data::name%]"
         }
       },
       "binary_sensor": {
@@ -101,6 +110,14 @@
   },
   "options": {
     "step": {
+      "automation": {
+        "description": "[%key:component::group::config::step::binary_sensor::description%]",
+        "data": {
+          "all": "[%key:component::group::config::step::binary_sensor::data::all%]",
+          "entities": "[%key:component::group::config::step::binary_sensor::data::entities%]",
+          "hide_members": "[%key:component::group::config::step::binary_sensor::data::hide_members%]"
+        }
+      },
       "binary_sensor": {
         "description": "[%key:component::group::config::step::binary_sensor::description%]",
         "data": {

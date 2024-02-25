@@ -71,6 +71,7 @@ SERVICE_SET = "set"
 SERVICE_REMOVE = "remove"
 
 PLATFORMS = [
+    Platform.AUTOMATION,
     Platform.BINARY_SENSOR,
     Platform.COVER,
     Platform.FAN,

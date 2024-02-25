@@ -31,6 +31,7 @@ PLATFORM_FORMAT: Final = "{platform}.{domain}"
 class Platform(StrEnum):
     """Available entity platforms."""
 
+    AUTOMATION = "automation"
     AIR_QUALITY = "air_quality"
     ALARM_CONTROL_PANEL = "alarm_control_panel"
     BINARY_SENSOR = "binary_sensor"

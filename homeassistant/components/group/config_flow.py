@@ -22,6 +22,7 @@ from homeassistant.helpers.schema_config_entry_flow import (
 )
 
 from . import DOMAIN, GroupEntity
+from .automation import async_create_preview_automation
 from .binary_sensor import CONF_ALL, async_create_preview_binary_sensor
 from .const import CONF_HIDE_MEMBERS, CONF_IGNORE_NON_NUMERIC
 from .cover import async_create_preview_cover
@@ -142,6 +143,7 @@ async def light_switch_options_schema(
 
 
 GROUP_TYPES = [
+    "automation",
     "binary_sensor",
     "cover",
     "event",
@@ -177,6 +179,11 @@ def set_group_type(
 
 CONFIG_FLOW = {
     "user": SchemaFlowMenuStep(GROUP_TYPES),
+    "automation": SchemaFlowFormStep(
+        basic_group_config_schema("automation"),
+        preview="group",
+        validate_user_input=set_group_type("automation"),
+    ),
     "binary_sensor": SchemaFlowFormStep(
         BINARY_SENSOR_CONFIG_SCHEMA,
         preview="group",
@@ -227,6 +234,10 @@ CONFIG_FLOW = {
 
 OPTIONS_FLOW = {
     "init": SchemaFlowFormStep(next_step=choose_options_step),
+    "automation": SchemaFlowFormStep(
+        partial(light_switch_options_schema, "automation"),
+        preview="group",
+    ),
     "binary_sensor": SchemaFlowFormStep(
         binary_sensor_options_schema,
         preview="group",
@@ -271,6 +282,7 @@ CREATE_PREVIEW_ENTITY: dict[
     str,
     Callable[[HomeAssistant, str, dict[str, Any]], GroupEntity | MediaPlayerGroup],
 ] = {
+    "automation": async_create_preview_automation,
     "binary_sensor": async_create_preview_binary_sensor,
     "cover": async_create_preview_cover,
     "event": async_create_preview_event,
